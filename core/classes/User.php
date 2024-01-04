@@ -32,25 +32,35 @@ class User extends Connect {
 
     
 
-      public static function create($table , $fields = array()) {
-            $colms = implode(',' , array_keys($fields));
-            $values = ':' . implode(', :' , array_keys($fields));
-            $sql = "INSERT INTO {$table} ({$colms}) VALUES ({$values})";
+      public static function create($table, $fields = array()) {
+        $columns = implode(',', array_keys($fields));
+        $values = ':' . implode(', :', array_keys($fields));
+        $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$values})";
+    
+        try {
             $pdo = self::connect();
-            $pdo->beginTransaction(); 
-            if($stmt = $pdo->prepare($sql)) {
-                  foreach($fields as $key => $data) {
-                    $stmt->bindValue(':'. $key , $data );
-                  }
-                  if ($stmt->execute() === FALSE) {
-                    $pdo->rollback();
-                  } else {
-                    $user_id = $pdo->lastInsertId();
-                    $pdo->commit();
-                  }
-                  return $user_id;
+            $pdo->beginTransaction();
+    
+            $stmt = $pdo->prepare($sql);
+    
+            foreach ($fields as $key => $data) {
+                $stmt->bindValue(':' . $key, $data);
             }
-      }
+    
+            $stmt->execute();
+    
+            $user_id = $pdo->lastInsertId();
+            $pdo->commit();
+    
+            return $user_id;
+        } catch (PDOException $e) {
+            // Handle the exception, for example, log the error
+            $pdo->rollBack();
+            echo 'Error: ' . $e->getMessage();
+            return false; // or throw an exception if you want to propagate the error
+        }
+    }
+    
       public static function register($email , $password , $name , $username) {
     
         $pdo = self::connect();

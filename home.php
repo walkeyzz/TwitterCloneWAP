@@ -68,12 +68,10 @@
  
         </div>
         <p>This is Twitter clone is developed by <span style="font-weight: 700;">Keiko Rajes</span>  for learning purpose.</p>
-        <p>The clone project includes tweet , retweet , quote or even quote the quoted tweet , like tweet and nested comments.
-          You can mention or add hashtag to yout tweet , change password or username.
-          Follow or unfollow people. get notificaction if any action happen. Search users by name or username. and more!
+        <p>You can express yourself here using this Twitter clone Application. Btw shout out for codeastro for this Twitter Clone project tutorial
         </p>
-        <p>By default you followed
-          <a style="color:#207ce5;" href="codeastro">@codeastro</a> 
+        <p>Jangan lupa follow
+          <a style="color:#207ce5;" href="codeastro">@walkeyzz</a> 
             to see their tweets.</p>
       </div>
       
